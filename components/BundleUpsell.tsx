@@ -143,10 +143,9 @@ const BundleUpsell: React.FC = () => {
 
                   <button
                     onClick={() => goToCheckout(2, 'BUNDLE10')}
-                    className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white py-3 rounded-full font-bold text-sm hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 hover:-translate-y-0.5"
+                    className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-white py-3 rounded-full font-bold text-sm hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap"
                   >
-                    <ShoppingBag className="w-4 h-4" />
-                    Add 2 to Cart — Save 10%
+                    Buy 2 — Save 10%
                   </button>
                 </motion.div>
 
@@ -178,9 +177,9 @@ const BundleUpsell: React.FC = () => {
 
                   <button
                     onClick={() => goToCheckout(1)}
-                    className="w-full flex items-center justify-center gap-2 border-2 border-gray-300 text-gray-700 py-3 rounded-full font-bold text-sm hover:border-gray-400 hover:bg-gray-50 transition-all duration-300"
+                    className="w-full border-2 border-gray-300 text-gray-700 py-3 rounded-full font-bold text-sm hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 whitespace-nowrap"
                   >
-                    Continue with 1
+                    Just 1 — Full Price
                   </button>
                 </motion.div>
 
@@ -243,10 +242,9 @@ const BundleUpsell: React.FC = () => {
 
                   <button
                     onClick={() => goToCheckout(familyQty, 'FAMILY25')}
-                    className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-purafy-500 to-purafy-600 text-white py-3 rounded-full font-bold text-sm hover:shadow-lg hover:shadow-purafy-500/30 transition-all duration-300 hover:-translate-y-0.5"
+                    className="w-full bg-gradient-to-r from-purafy-500 to-purafy-600 text-white py-3 rounded-full font-bold text-sm hover:shadow-lg hover:shadow-purafy-500/30 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap"
                   >
-                    <ShoppingBag className="w-4 h-4" />
-                    Add {familyQty} to Cart — Save 25%
+                    Buy {familyQty} — Save 25%
                   </button>
                 </motion.div>
               </div>
