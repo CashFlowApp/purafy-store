@@ -6,7 +6,7 @@ const rows = [
   { label: 'Tank Capacity', home: '4L (4000ml)', mini: '1000ml' },
   { label: 'Runtime', home: 'Up to 30 hours', mini: 'Up to 12 hours' },
   { label: 'Mist Output', home: '400ml/hour', mini: '50ml/hour' },
-  { label: 'Room Coverage', home: 'Up to 25 sqm', mini: 'Up to 30-40 sqm' },
+  { label: 'Room Coverage', home: 'Up to 40 sqm', mini: 'Up to 20 sqm' },
   { label: 'Noise Level', home: '<28 dB', mini: '20-40 dB' },
   { label: 'Power', home: 'AC 25W', mini: 'USB DC 5V / 3W' },
   { label: 'Cool & Warm Mist', home: true, mini: false },

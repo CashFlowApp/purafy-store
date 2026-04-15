@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     question: 'What size room does it cover?',
-    answer: 'The Purafy Home effectively covers rooms up to 25 sqm (270 sq ft) with its powerful 400ml/hr mist output — perfect for bedrooms, living rooms, and home offices. The Mini covers up to 30-40 sqm with 50ml/hr output — ideal for personal spaces, desks, and nurseries.',
+    answer: 'The Purafy Home effectively covers rooms up to 40 sqm (430 sq ft) with its powerful 400ml/hr mist output — perfect for bedrooms, living rooms, and home offices. The Mini covers up to 20 sqm (215 sq ft) with 50ml/hr output — ideal for personal spaces, desks, and nurseries.',
   },
   {
     question: 'How do I clean it?',

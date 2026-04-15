@@ -33,7 +33,7 @@ const products = [
     specs: [
       { icon: Droplets, label: '1000ml Tank' },
       { icon: Zap, label: 'USB 5V Powered' },
-      { icon: Maximize, label: '30-40 sqm' },
+      { icon: Maximize, label: '20 sqm' },
       { icon: Palette, label: '7-Color LED' },
     ],
     colors: ['White', 'Black'],

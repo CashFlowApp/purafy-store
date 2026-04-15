@@ -29,7 +29,7 @@ const MiniShowcase: React.FC = () => {
                 { icon: Zap, label: 'USB DC 5V / 3W', desc: 'Plug into any laptop, power bank, or car adapter.' },
                 { icon: Palette, label: '7-Color LED', desc: 'Set the vibe wherever you are.' },
                 { icon: Volume2, label: '1000ml Tank', desc: 'Up to 12 hours of continuous mist on a single fill.' },
-                { icon: Maximize, label: '30-40 sqm Coverage', desc: 'Covers desks, nightstands, nurseries — even small rooms.' },
+                { icon: Maximize, label: '20 sqm Coverage', desc: 'Covers desks, nightstands, nurseries — even small rooms.' },
               ].map((spec) => (
                 <div key={spec.label} className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-purafy-50 flex items-center justify-center flex-shrink-0">
