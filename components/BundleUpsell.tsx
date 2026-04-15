@@ -12,7 +12,7 @@ const productData = {
     price: 159.99,
     comparePrice: 229.99,
     image: '/assets/home-hero-dark.jpg',
-    bundleImage2: '/assets/home-both-colors.jpg',
+    bundleImage2: '/assets/home-bundle-2.jpg',
     bundleImage3: '/assets/home-bundle-3.jpg',
   },
   mini: {
