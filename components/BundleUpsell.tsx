@@ -41,7 +41,7 @@ const BundleUpsell: React.FC = () => {
   const data = productData[product];
   const price1 = data.price;
   const price2Original = data.price * 2;
-  const price2Discounted = +(price2Original * 0.9).toFixed(2);
+  const price2Discounted = +(price2Original * 0.85).toFixed(2);
   const savings2 = +(price2Original - price2Discounted).toFixed(2);
   const priceFamilyOriginal = +(data.price * familyQty).toFixed(2);
   const priceFamilyDiscounted = +(priceFamilyOriginal * 0.75).toFixed(2);
@@ -115,7 +115,7 @@ const BundleUpsell: React.FC = () => {
                   </div>
 
                   <h4 className="font-extrabold text-gray-900 text-center mt-2 mb-3" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
-                    Buy 2 — Save 10%
+                    Buy 2 — Save 15%
                   </h4>
 
                   <div className="w-full aspect-[16/10] rounded-lg overflow-hidden mb-4 bg-gray-50">
@@ -142,10 +142,10 @@ const BundleUpsell: React.FC = () => {
                   </div>
 
                   <button
-                    onClick={() => goToCheckout(2, 'BUNDLE10')}
+                    onClick={() => goToCheckout(2, 'BUNDLE15')}
                     className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-white py-3 rounded-full font-bold text-sm hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap"
                   >
-                    Buy 2 — Save 10%
+                    Buy 2 — Save 15%
                   </button>
                 </motion.div>
 
