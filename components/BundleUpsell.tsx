@@ -31,7 +31,7 @@ const productData: Record<string, ProductConfig> = {
     bundleImage3: '/assets/home-bundle-3.jpg',
     variants: [
       { title: 'Matte Black', color: '#111111', id: '44203697864755', image: '/assets/home-hero-dark.jpg' },
-      { title: 'Clean White', color: '#F5F5F5', id: '44203934384179', image: '/assets/home-both-colors.jpg' },
+      { title: 'White', color: '#F5F5F5', id: '44203934384179', image: '/assets/home-both-colors.jpg' },
     ],
     defaultVariant: 0,
   },
