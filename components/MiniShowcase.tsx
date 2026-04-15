@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ShoppingBag, Zap, Palette, Volume2, Maximize } from 'lucide-react';
+import { useUpsell } from './UpsellContext';
 
 const MiniShowcase: React.FC = () => {
+  const { openUpsellModal } = useUpsell();
+
   return (
     <section className="py-24 md:py-32 bg-gradient-to-b from-surface-light to-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
@@ -60,9 +63,9 @@ const MiniShowcase: React.FC = () => {
                 <span className="text-sm text-gray-400 line-through mr-2">$89.99</span>
                 <span className="text-3xl font-extrabold text-purafy-900" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>$59.99</span>
               </div>
-              <a href="https://pqf3tp-z6.myshopify.com/cart/44203703107635:1" className="inline-flex items-center gap-2 bg-gradient-to-r from-purafy-500 to-purafy-600 text-white px-6 py-3 rounded-full font-bold hover:shadow-lg hover:shadow-purafy-500/30 transition-all hover:-translate-y-0.5">
+              <button onClick={() => openUpsellModal('mini')} className="inline-flex items-center gap-2 bg-gradient-to-r from-purafy-500 to-purafy-600 text-white px-6 py-3 rounded-full font-bold hover:shadow-lg hover:shadow-purafy-500/30 transition-all hover:-translate-y-0.5 cursor-pointer">
                 <ShoppingBag className="w-4 h-4" />Shop Mini
-              </a>
+              </button>
             </div>
           </motion.div>
         </div>

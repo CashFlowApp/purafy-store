@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Droplets, Battery, Maximize, Palette, ShoppingBag, Zap, Thermometer, Wifi } from 'lucide-react';
+import { useUpsell } from './UpsellContext';
 
 const products = [
   {
@@ -11,7 +12,7 @@ const products = [
     image: '/assets/home-both-colors.jpg',
     badge: 'Best Seller',
     badgeColor: 'from-amber-glow to-amber-warm',
-    checkoutUrl: 'https://pqf3tp-z6.myshopify.com/cart/44203697864755:1',
+    upsellKey: 'home' as const,
     specs: [
       { icon: Droplets, label: '4L Tank' },
       { icon: Battery, label: '30hr Runtime' },
@@ -29,7 +30,7 @@ const products = [
     image: '/assets/mini-white.jpg',
     badge: 'Most Portable',
     badgeColor: 'from-purafy-500 to-cyan-accent',
-    checkoutUrl: 'https://pqf3tp-z6.myshopify.com/cart/44203703107635:1',
+    upsellKey: 'mini' as const,
     specs: [
       { icon: Droplets, label: '1000ml Tank' },
       { icon: Zap, label: 'USB 5V Powered' },
@@ -42,6 +43,8 @@ const products = [
 ];
 
 const ProductSelector: React.FC = () => {
+  const { openUpsellModal } = useUpsell();
+
   return (
     <section id="product-selector" className="py-24 md:py-32 bg-surface-white">
       <div className="max-w-6xl mx-auto px-6">
@@ -78,23 +81,13 @@ const ProductSelector: React.FC = () => {
                     <span className="text-sm text-gray-400 line-through mr-2">{product.comparePrice}</span>
                     <span className="text-3xl font-extrabold text-purafy-900" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>{product.price}</span>
                   </div>
-                  <a href={product.checkoutUrl} className={`inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 ${product.highlight ? 'bg-gradient-to-r from-amber-glow to-amber-warm hover:shadow-lg hover:shadow-amber-glow/30' : 'bg-gradient-to-r from-purafy-500 to-purafy-600 hover:shadow-lg hover:shadow-purafy-500/30'}`}>
+                  <button onClick={() => openUpsellModal(product.upsellKey)} className={`inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 cursor-pointer ${product.highlight ? 'bg-gradient-to-r from-amber-glow to-amber-warm hover:shadow-lg hover:shadow-amber-glow/30' : 'bg-gradient-to-r from-purafy-500 to-purafy-600 hover:shadow-lg hover:shadow-purafy-500/30'}`}>
                     <ShoppingBag className="w-4 h-4" />Shop Now
-                  </a>
+                  </button>
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
-
-        {/* Bundle offer banner */}
-        <div className="mt-8 text-center">
-          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purafy-50 to-amber-light/20 border border-purafy-200 rounded-full px-6 py-3">
-            <span className="text-sm font-semibold text-purafy-800">🎁 Buy 2 — Save 10%</span>
-            <span className="text-purafy-300">|</span>
-            <span className="text-sm font-semibold text-amber-warm">Buy 3+ — Save 25% (Family Bundle)</span>
-          </div>
-          <p className="text-xs text-gray-400 mt-2">Discounts apply automatically at checkout</p>
         </div>
       </div>
     </section>

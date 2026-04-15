@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Star, ShoppingBag, Truck } from 'lucide-react';
+import { useUpsell } from './UpsellContext';
 
 const Hero: React.FC = () => {
+  const { openUpsellModal } = useUpsell();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-purafy-900">
       {/* Video Background */}
@@ -73,13 +76,13 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a href="https://pqf3tp-z6.myshopify.com/cart/44203697864755:1" className="group flex items-center gap-3 bg-gradient-to-r from-amber-glow to-amber-warm text-white px-8 py-4 rounded-full text-lg font-bold hover:shadow-2xl hover:shadow-amber-glow/30 transition-all duration-300 hover:-translate-y-1">
+          <button onClick={() => openUpsellModal('home')} className="group flex items-center gap-3 bg-gradient-to-r from-amber-glow to-amber-warm text-white px-8 py-4 rounded-full text-lg font-bold hover:shadow-2xl hover:shadow-amber-glow/30 transition-all duration-300 hover:-translate-y-1 cursor-pointer">
             <ShoppingBag className="w-5 h-5" />
             Shop Purafy Home — $159.99
-          </a>
-          <a href="https://pqf3tp-z6.myshopify.com/cart/44203703107635:1" className="flex items-center gap-2 text-white bg-white/10 backdrop-blur-sm hover:bg-white/15 px-8 py-4 rounded-full border border-white/15 hover:border-white/30 transition-all duration-300 font-bold">
+          </button>
+          <button onClick={() => openUpsellModal('mini')} className="flex items-center gap-2 text-white bg-white/10 backdrop-blur-sm hover:bg-white/15 px-8 py-4 rounded-full border border-white/15 hover:border-white/30 transition-all duration-300 font-bold cursor-pointer">
             Shop Purafy Mini — $59.99
-          </a>
+          </button>
         </motion.div>
 
         <motion.div

@@ -1,4 +1,6 @@
 import React from 'react';
+import { UpsellProvider } from './components/UpsellContext';
+import BundleUpsell from './components/BundleUpsell';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ProductSelector from './components/ProductSelector';
@@ -17,23 +19,26 @@ import StickyCTA from './components/StickyCTA';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <ProductSelector />
-      <Benefits />
-      <ProductShowcase />
-      <HowItWorks />
-      <VideoShowcase />
-      <MiniShowcase />
-      <Testimonials />
-      <Lifestyle />
-      <ComparisonTable />
-      <FAQ />
-      <CTA />
-      <Footer />
-      <StickyCTA />
-    </div>
+    <UpsellProvider>
+      <div className="min-h-screen">
+        <Navbar />
+        <Hero />
+        <ProductSelector />
+        <Benefits />
+        <ProductShowcase />
+        <HowItWorks />
+        <VideoShowcase />
+        <MiniShowcase />
+        <Testimonials />
+        <Lifestyle />
+        <ComparisonTable />
+        <FAQ />
+        <CTA />
+        <Footer />
+        <StickyCTA />
+        <BundleUpsell />
+      </div>
+    </UpsellProvider>
   );
 };
 

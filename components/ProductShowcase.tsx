@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Droplets, Palette, Zap, Thermometer, Wifi, ShoppingBag } from 'lucide-react';
+import { useUpsell } from './UpsellContext';
 
 const features = [
   { icon: Droplets, label: '4L Large Capacity', sublabel: '30 hours on one fill', position: 'left' },
@@ -13,6 +14,7 @@ const features = [
 const ProductShowcase: React.FC = () => {
   const leftFeatures = features.filter(f => f.position === 'left');
   const rightFeatures = features.filter(f => f.position === 'right');
+  const { openUpsellModal } = useUpsell();
 
   return (
     <section className="py-24 md:py-32 bg-gradient-to-b from-purafy-900 to-purafy-950 overflow-hidden">
@@ -82,9 +84,9 @@ const ProductShowcase: React.FC = () => {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }} className="text-center mt-12">
-          <a href="https://pqf3tp-z6.myshopify.com/cart/44203697864755:1" className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-glow to-amber-warm text-white px-8 py-4 rounded-full text-lg font-bold hover:shadow-2xl hover:shadow-amber-glow/30 transition-all duration-300 hover:-translate-y-1">
+          <button onClick={() => openUpsellModal('home')} className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-glow to-amber-warm text-white px-8 py-4 rounded-full text-lg font-bold hover:shadow-2xl hover:shadow-amber-glow/30 transition-all duration-300 hover:-translate-y-1 cursor-pointer">
             <ShoppingBag className="w-5 h-5" />Shop Purafy Home — $159.99
-          </a>
+          </button>
         </motion.div>
       </div>
     </section>
