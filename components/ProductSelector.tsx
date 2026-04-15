@@ -86,6 +86,16 @@ const ProductSelector: React.FC = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Bundle offer banner */}
+        <div className="mt-8 text-center">
+          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purafy-50 to-amber-light/20 border border-purafy-200 rounded-full px-6 py-3">
+            <span className="text-sm font-semibold text-purafy-800">🎁 Buy 2 — Save 10%</span>
+            <span className="text-purafy-300">|</span>
+            <span className="text-sm font-semibold text-amber-warm">Buy 3+ — Save 25% (Family Bundle)</span>
+          </div>
+          <p className="text-xs text-gray-400 mt-2">Discounts apply automatically at checkout</p>
+        </div>
       </div>
     </section>
   );

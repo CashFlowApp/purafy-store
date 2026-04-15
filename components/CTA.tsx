@@ -37,6 +37,9 @@ const CTA: React.FC = () => {
           </div>
 
           <p className="text-white/25 text-sm mt-6">Free shipping on all orders. No hidden fees.</p>
+          <div className="mt-4 inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-5 py-2">
+            <span className="text-xs font-semibold text-amber-glow">🎁 Buy 2 Save 10% | Buy 3+ Save 25%</span>
+          </div>
 
           <div className="flex flex-wrap items-center justify-center gap-8 mt-12">
             {[
