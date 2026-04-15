@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Purafy | Better Air. Better Sleep. Better Life.</title>
+  <meta name="description" content="The 1000ml smart humidifier that purifies your space with ultrasonic micro-fog and 7-color ambient lighting. Breathe deeper. Sleep sounder. Wake refreshed." />
+  <meta property="og:title" content="Purafy | Smart Humidifier & Ambient Light" />
+  <meta property="og:description" content="Better air. Better sleep. Better life. The Purafy smart humidifier with ultrasonic micro-fog and 7-color LED." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%92%A7</text></svg>" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            purafy: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3B82F6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#0F172A',
+              950: '#0a0f1e',
+            },
+            cyan: {
+              accent: '#06B6D4',
+              light: '#67e8f9',
+              dark: '#0891b2',
+            },
+            amber: {
+              glow: '#F59E0B',
+              warm: '#D97706',
+              light: '#FDE68A',
+            },
+            surface: {
+              white: '#F8FAFC',
+              light: '#F1F5F9',
+              mist: '#E2E8F0',
+            }
+          },
+          fontFamily: {
+            display: ['"Plus Jakarta Sans"', 'sans-serif'],
+            body: ['"Inter"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-body: 'Inter', sans-serif;
+      --font-display: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: #F8FAFC;
+      color: #0F172A;
+      margin: 0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-display);
+    }
+
+    ::selection {
+      background-color: #3B82F6;
+      color: #ffffff;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #3B82F6 0%, #06B6D4 100%);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #F59E0B 0%, #D97706 100%);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>
