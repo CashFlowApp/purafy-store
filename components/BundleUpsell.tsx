@@ -1,28 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Truck, ShoppingBag, Minus, Plus, Tag } from 'lucide-react';
+import { X, Truck, Minus, Plus, Tag } from 'lucide-react';
 import { useUpsell } from './UpsellContext';
 
 const STORE_URL = 'https://pqf3tp-z6.myshopify.com';
 
-const productData = {
+interface Variant {
+  title: string;
+  color: string;
+  id: string;
+  image: string;
+}
+
+interface ProductConfig {
+  name: string;
+  price: number;
+  comparePrice: number;
+  bundleImage2: string;
+  bundleImage3: string;
+  variants: Variant[];
+  defaultVariant: number;
+}
+
+const productData: Record<string, ProductConfig> = {
   home: {
     name: 'Purafy Home',
-    variantId: '44203697864755',
     price: 159.99,
     comparePrice: 229.99,
-    image: '/assets/home-hero-dark.jpg',
     bundleImage2: '/assets/home-bundle-2.jpg',
     bundleImage3: '/assets/home-bundle-3.jpg',
+    variants: [
+      { title: 'Matte Black', color: '#111111', id: '44203697864755', image: '/assets/home-hero-dark.jpg' },
+      { title: 'Clean White', color: '#F5F5F5', id: '44203934384179', image: '/assets/home-both-colors.jpg' },
+    ],
+    defaultVariant: 0,
   },
   mini: {
     name: 'Purafy Mini',
-    variantId: '44203703107635',
     price: 59.99,
     comparePrice: 89.99,
-    image: '/assets/mini-white.jpg',
     bundleImage2: '/assets/mini-bundle-2.jpg',
     bundleImage3: '/assets/mini-bundle-3.jpg',
+    variants: [
+      { title: 'White', color: '#F5F5F5', id: '44203934416947', image: '/assets/mini-white.jpg' },
+      { title: 'Black', color: '#111111', id: '44203703107635', image: '/assets/mini-black.jpg' },
+    ],
+    defaultVariant: 0,
   },
 };
 
@@ -35,10 +58,20 @@ const buildCheckoutUrl = (variantId: string, qty: number, discountCode?: string)
 const BundleUpsell: React.FC = () => {
   const { isOpen, product, closeUpsellModal } = useUpsell();
   const [familyQty, setFamilyQty] = useState(3);
+  const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
+
+  // Reset variant selection when product changes
+  useEffect(() => {
+    if (product) {
+      setSelectedVariantIdx(productData[product].defaultVariant);
+      setFamilyQty(3);
+    }
+  }, [product]);
 
   if (!product) return null;
 
   const data = productData[product];
+  const selectedVariant = data.variants[selectedVariantIdx];
   const price1 = data.price;
   const price2Original = data.price * 2;
   const price2Discounted = +(price2Original * 0.85).toFixed(2);
@@ -48,7 +81,7 @@ const BundleUpsell: React.FC = () => {
   const savingsFamily = +(priceFamilyOriginal - priceFamilyDiscounted).toFixed(2);
 
   const goToCheckout = (qty: number, discount?: string) => {
-    window.location.href = buildCheckoutUrl(data.variantId, qty, discount);
+    window.location.href = buildCheckoutUrl(selectedVariant.id, qty, discount);
   };
 
   return (
@@ -62,10 +95,8 @@ const BundleUpsell: React.FC = () => {
           className="fixed inset-0 z-[100] flex items-center justify-center p-4"
           onClick={closeUpsellModal}
         >
-          {/* Backdrop */}
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
-          {/* Modal Card */}
           <motion.div
             initial={{ opacity: 0, y: 40, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -82,17 +113,45 @@ const BundleUpsell: React.FC = () => {
               <X className="w-4 h-4 text-gray-600" />
             </button>
 
-            {/* Header */}
+            {/* Header + Color Picker */}
             <div className="px-6 pt-6 pb-4 border-b border-gray-100">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 mb-4">
                 <div className="w-16 h-16 rounded-xl overflow-hidden border border-gray-200 flex-shrink-0">
-                  <img src={data.image} alt={data.name} className="w-full h-full object-cover" />
+                  <img src={selectedVariant.image} alt={data.name} className="w-full h-full object-cover" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500 font-medium">{data.name} selected</p>
+                  <p className="text-sm text-gray-500 font-medium">{data.name} — {selectedVariant.title}</p>
                   <h3 className="text-xl md:text-2xl font-extrabold text-gray-900" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
                     Great choice! Want to save more?
                   </h3>
+                </div>
+              </div>
+
+              {/* Color Selector */}
+              <div className="flex items-center gap-4">
+                <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Color:</span>
+                <div className="flex items-center gap-3">
+                  {data.variants.map((variant, idx) => (
+                    <button
+                      key={variant.id}
+                      onClick={() => setSelectedVariantIdx(idx)}
+                      className="flex flex-col items-center gap-1 group"
+                    >
+                      <div
+                        className={`w-8 h-8 rounded-full border-2 transition-all duration-200 hover:scale-110 ${
+                          selectedVariantIdx === idx
+                            ? 'ring-2 ring-offset-2 ring-blue-500 border-gray-300'
+                            : 'border-gray-300 hover:border-gray-400'
+                        }`}
+                        style={{ backgroundColor: variant.color }}
+                      />
+                      <span className={`text-[10px] font-medium transition-colors ${
+                        selectedVariantIdx === idx ? 'text-gray-900' : 'text-gray-400 group-hover:text-gray-600'
+                      }`}>
+                        {variant.title}
+                      </span>
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
@@ -101,7 +160,7 @@ const BundleUpsell: React.FC = () => {
             <div className="p-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-                {/* === OPTION 2: Buy 2 (FIRST on mobile via order-first) === */}
+                {/* OPTION 2: Buy 2 — Most Popular */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -113,77 +172,44 @@ const BundleUpsell: React.FC = () => {
                       <Tag className="w-3 h-3" />Most Popular
                     </span>
                   </div>
-
                   <h4 className="font-extrabold text-gray-900 text-center mt-2 mb-3" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
                     Buy 2 — Save 15%
                   </h4>
-
                   <div className="w-full aspect-[16/10] rounded-lg overflow-hidden mb-4 bg-gray-50">
-                    <img
-                      src={data.bundleImage2}
-                      alt={`2x ${data.name}`}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        target.parentElement!.innerHTML = `<div class="w-full h-full flex items-center justify-center gap-2 p-3"><img src="${data.image}" class="w-1/2 h-full object-cover rounded-lg" /><img src="${data.image}" class="w-1/2 h-full object-cover rounded-lg" /></div>`;
-                      }}
-                    />
+                    <img src={data.bundleImage2} alt={`2x ${data.name}`} className="w-full h-full object-cover"
+                      onError={(e) => { const t = e.target as HTMLImageElement; t.style.display='none'; t.parentElement!.innerHTML=`<div class="w-full h-full flex items-center justify-center gap-2 p-3"><img src="${selectedVariant.image}" class="w-1/2 h-full object-cover rounded-lg" /><img src="${selectedVariant.image}" class="w-1/2 h-full object-cover rounded-lg" /></div>`; }} />
                   </div>
-
                   <div className="text-center mb-4 flex-1">
                     <span className="text-sm text-gray-400 line-through">${price2Original.toFixed(2)}</span>
-                    <div className="text-2xl font-extrabold text-gray-900" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
-                      ${price2Discounted.toFixed(2)}
-                    </div>
-                    <span className="inline-block mt-1 text-xs font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">
-                      You save ${savings2.toFixed(2)}
-                    </span>
+                    <div className="text-2xl font-extrabold text-gray-900" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>${price2Discounted.toFixed(2)}</div>
+                    <span className="inline-block mt-1 text-xs font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">You save ${savings2.toFixed(2)}</span>
                   </div>
-
-                  <button
-                    onClick={() => goToCheckout(2, 'BUNDLE15')}
-                    className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-white py-3 rounded-full font-bold text-sm hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap"
-                  >
+                  <button onClick={() => goToCheckout(2, 'BUNDLE15')} className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-white py-3 rounded-full font-bold text-sm hover:shadow-lg hover:shadow-amber-500/30 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap">
                     Buy 2 — Save 15%
                   </button>
                 </motion.div>
 
-                {/* === OPTION 1: Just One === */}
+                {/* OPTION 1: Just One */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.25 }}
                   className="relative rounded-xl border border-gray-200 bg-white p-5 flex flex-col order-2 md:order-1"
                 >
-                  <h4 className="font-extrabold text-gray-900 text-center mt-2 mb-3" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
-                    Just One
-                  </h4>
-
+                  <h4 className="font-extrabold text-gray-900 text-center mt-2 mb-3" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Just One</h4>
                   <div className="w-full aspect-[16/10] rounded-lg overflow-hidden mb-4 bg-gray-50 flex items-center justify-center">
-                    <img
-                      src={data.image}
-                      alt={`1x ${data.name}`}
-                      className="h-full object-cover rounded-lg"
-                    />
+                    <img src={selectedVariant.image} alt={`1x ${data.name}`} className="h-full object-cover rounded-lg" />
                   </div>
-
                   <div className="text-center mb-4 flex-1">
-                    <div className="text-2xl font-extrabold text-gray-900" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
-                      ${price1.toFixed(2)}
-                    </div>
+                    <div className="text-2xl font-extrabold text-gray-900" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>${price1.toFixed(2)}</div>
                     <span className="text-xs text-gray-400 mt-1 block">Standard pricing</span>
                   </div>
-
-                  <button
-                    onClick={() => goToCheckout(1)}
-                    className="w-full border-2 border-gray-300 text-gray-700 py-3 rounded-full font-bold text-sm hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 whitespace-nowrap"
-                  >
+                  <button onClick={() => goToCheckout(1)} className="w-full border-2 border-gray-300 text-gray-700 py-3 rounded-full font-bold text-sm hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 whitespace-nowrap">
                     Just 1 — Full Price
                   </button>
                 </motion.div>
 
-                {/* === OPTION 3: Family Bundle 3+ === */}
+                {/* OPTION 3: Family Bundle 3+ */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -191,59 +217,28 @@ const BundleUpsell: React.FC = () => {
                   className="relative rounded-xl border-2 border-purafy-400 bg-purafy-50/30 p-5 flex flex-col order-3"
                 >
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="inline-flex items-center gap-1 bg-gradient-to-r from-purafy-500 to-purafy-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
-                      Best Value
-                    </span>
+                    <span className="inline-flex items-center gap-1 bg-gradient-to-r from-purafy-500 to-purafy-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">Best Value</span>
                   </div>
-
-                  <h4 className="font-extrabold text-gray-900 text-center mt-2 mb-3" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
-                    Family Bundle — 3+
-                  </h4>
-
+                  <h4 className="font-extrabold text-gray-900 text-center mt-2 mb-3" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Family Bundle — 3+</h4>
                   <div className="w-full aspect-[16/10] rounded-lg overflow-hidden mb-4 bg-gray-50">
-                    <img
-                      src={data.bundleImage3}
-                      alt={`${familyQty}x ${data.name}`}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        target.parentElement!.innerHTML = `<div class="w-full h-full flex items-center justify-center gap-1 p-2"><img src="${data.image}" class="w-1/3 h-full object-cover rounded-lg" /><img src="${data.image}" class="w-1/3 h-full object-cover rounded-lg" /><img src="${data.image}" class="w-1/3 h-full object-cover rounded-lg" /></div>`;
-                      }}
-                    />
+                    <img src={data.bundleImage3} alt={`${familyQty}x ${data.name}`} className="w-full h-full object-cover"
+                      onError={(e) => { const t = e.target as HTMLImageElement; t.style.display='none'; t.parentElement!.innerHTML=`<div class="w-full h-full flex items-center justify-center gap-1 p-2"><img src="${selectedVariant.image}" class="w-1/3 h-full object-cover rounded-lg" /><img src="${selectedVariant.image}" class="w-1/3 h-full object-cover rounded-lg" /><img src="${selectedVariant.image}" class="w-1/3 h-full object-cover rounded-lg" /></div>`; }} />
                   </div>
-
-                  {/* Quantity Selector */}
                   <div className="flex items-center justify-center gap-3 mb-3">
-                    <button
-                      onClick={() => setFamilyQty(Math.max(3, familyQty - 1))}
-                      className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100 transition-colors"
-                    >
+                    <button onClick={() => setFamilyQty(Math.max(3, familyQty - 1))} className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100 transition-colors">
                       <Minus className="w-3.5 h-3.5" />
                     </button>
                     <span className="text-lg font-extrabold text-gray-900 w-6 text-center">{familyQty}</span>
-                    <button
-                      onClick={() => setFamilyQty(Math.min(10, familyQty + 1))}
-                      className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100 transition-colors"
-                    >
+                    <button onClick={() => setFamilyQty(Math.min(10, familyQty + 1))} className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100 transition-colors">
                       <Plus className="w-3.5 h-3.5" />
                     </button>
                   </div>
-
                   <div className="text-center mb-4 flex-1">
                     <span className="text-sm text-gray-400 line-through">${priceFamilyOriginal.toFixed(2)}</span>
-                    <div className="text-2xl font-extrabold text-gray-900" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
-                      ${priceFamilyDiscounted.toFixed(2)}
-                    </div>
-                    <span className="inline-block mt-1 text-xs font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">
-                      You save ${savingsFamily.toFixed(2)}
-                    </span>
+                    <div className="text-2xl font-extrabold text-gray-900" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>${priceFamilyDiscounted.toFixed(2)}</div>
+                    <span className="inline-block mt-1 text-xs font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">You save ${savingsFamily.toFixed(2)}</span>
                   </div>
-
-                  <button
-                    onClick={() => goToCheckout(familyQty, 'FAMILY25')}
-                    className="w-full bg-gradient-to-r from-purafy-500 to-purafy-600 text-white py-3 rounded-full font-bold text-sm hover:shadow-lg hover:shadow-purafy-500/30 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap"
-                  >
+                  <button onClick={() => goToCheckout(familyQty, 'FAMILY25')} className="w-full bg-gradient-to-r from-purafy-500 to-purafy-600 text-white py-3 rounded-full font-bold text-sm hover:shadow-lg hover:shadow-purafy-500/30 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap">
                     Buy {familyQty} — Save 25%
                   </button>
                 </motion.div>
