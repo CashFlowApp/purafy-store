@@ -25,7 +25,7 @@ const CTA: React.FC = () => {
           </h2>
 
           <p className="text-lg text-white/40 max-w-xl mx-auto mb-10 font-light">
-            Free shipping. 30-day money-back guarantee. Your lungs will thank you.
+            $5.99 flat-rate shipping. 30-day money-back guarantee. Your lungs will thank you.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
@@ -39,13 +39,13 @@ const CTA: React.FC = () => {
             </button>
           </div>
 
-          <p className="text-white/25 text-sm mt-6">Free shipping on all orders. No hidden fees.</p>
+          <p className="text-white/25 text-sm mt-6">$5.99 flat-rate US shipping. No hidden fees.</p>
 
           <div className="flex flex-wrap items-center justify-center gap-8 mt-12">
             {[
               { icon: Shield, label: 'SSL Secure\nCheckout' },
               { icon: RotateCcw, label: '30-Day Money\nBack Guarantee' },
-              { icon: Truck, label: 'Free Shipping\nWorldwide' },
+              { icon: Truck, label: 'Fast Shipping\nWorldwide' },
             ].map((badge) => (
               <div key={badge.label} className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">

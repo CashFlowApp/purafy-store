@@ -91,7 +91,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.6, delay: 1.2 }}
           className="flex flex-wrap items-center justify-center gap-6 mt-12 text-white/30 text-sm"
         >
-          <span className="flex items-center gap-1.5"><Truck className="w-4 h-4" />Free Shipping</span>
+          <span className="flex items-center gap-1.5"><Truck className="w-4 h-4" />Fast Shipping</span>
           <span className="w-1 h-1 rounded-full bg-white/20" />
           <span>30-Day Guarantee</span>
           <span className="w-1 h-1 rounded-full bg-white/20" />

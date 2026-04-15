@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     question: 'Do you ship internationally?',
-    answer: 'Yes! We offer free shipping to the US, Canada, UK, and Australia. Standard delivery is 3-7 business days. Express shipping is available at checkout.',
+    answer: 'Yes! We ship worldwide. US shipping is $5.99 flat rate, international shipping is $9.99. Standard delivery is 5-12 business days depending on destination.',
   },
   {
     question: 'What\'s your return policy?',

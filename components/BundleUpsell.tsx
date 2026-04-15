@@ -254,7 +254,7 @@ const BundleUpsell: React.FC = () => {
             <div className="px-6 pb-5 pt-2 border-t border-gray-100">
               <div className="flex items-center justify-center gap-2 text-gray-400 text-sm">
                 <Truck className="w-4 h-4" />
-                <span>Free shipping on all orders</span>
+                <span>$5.99 flat-rate US shipping</span>
               </div>
             </div>
           </motion.div>
