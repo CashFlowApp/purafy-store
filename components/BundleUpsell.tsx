@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Truck, Minus, Plus, Tag } from 'lucide-react';
 import { useUpsell } from './UpsellContext';
 
+declare global { interface Window { fbq: any } }
+
 const STORE_URL = 'https://pqf3tp-z6.myshopify.com';
 
 interface Variant {
@@ -60,11 +62,17 @@ const BundleUpsell: React.FC = () => {
   const [familyQty, setFamilyQty] = useState(3);
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
 
-  // Reset variant selection when product changes
+  // Reset variant selection + fire Meta Pixel ViewContent
   useEffect(() => {
     if (product) {
       setSelectedVariantIdx(productData[product].defaultVariant);
       setFamilyQty(3);
+      if (window.fbq) window.fbq('track', 'ViewContent', {
+        content_name: productData[product].name,
+        content_type: 'product',
+        value: productData[product].price,
+        currency: 'USD',
+      });
     }
   }, [product]);
 
@@ -81,6 +89,14 @@ const BundleUpsell: React.FC = () => {
   const savingsFamily = +(priceFamilyOriginal - priceFamilyDiscounted).toFixed(2);
 
   const goToCheckout = (qty: number, discount?: string) => {
+    const total = discount === 'BUNDLE15' ? +(data.price * qty * 0.85).toFixed(2)
+      : discount === 'FAMILY25' ? +(data.price * qty * 0.75).toFixed(2)
+      : +(data.price * qty).toFixed(2);
+    if (window.fbq) window.fbq('track', 'InitiateCheckout', {
+      value: total,
+      currency: 'USD',
+      num_items: qty,
+    });
     window.location.href = buildCheckoutUrl(selectedVariant.id, qty, discount);
   };
 
