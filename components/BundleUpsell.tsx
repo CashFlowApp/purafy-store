@@ -43,7 +43,7 @@ const productData: Record<string, ProductConfig> = {
     bundleImage3: '/assets/mini-bundle-3.jpg',
     variants: [
       { title: 'White', color: '#F5F5F5', id: '44203934416947', image: '/assets/mini-white.jpg' },
-      { title: 'Black', color: '#111111', id: '44203703107635', image: '/assets/mini-black.jpg' },
+      { title: 'Black', color: '#111111', id: '44204298436659', image: '/assets/mini-black.jpg' },
     ],
     defaultVariant: 0,
   },
