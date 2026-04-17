@@ -67,7 +67,7 @@ const FAQ: React.FC = () => {
           <span className="inline-block text-sm font-bold text-purafy-500 uppercase tracking-[0.2em] mb-4">FAQ</span>
           <h2 className="text-4xl md:text-5xl font-extrabold text-purafy-900" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Got Questions?</h2>
         </motion.div>
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} className="bg-white rounded-2xl border border-gray-100 shadow-sm px-8">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} className="bg-white rounded-2xl border border-gray-100 shadow-sm px-4 sm:px-8">
           {faqs.map((faq, index) => (
             <FAQItem key={index} faq={faq} isOpen={openIndex === index} toggle={() => setOpenIndex(openIndex === index ? null : index)} />
           ))}

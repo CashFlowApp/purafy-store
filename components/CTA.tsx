@@ -29,11 +29,11 @@ const CTA: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
-            <button onClick={() => openUpsellModal('home')} className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-glow to-amber-warm text-white px-8 py-4 rounded-full text-lg font-extrabold hover:shadow-2xl hover:shadow-amber-glow/30 transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+            <button onClick={() => openUpsellModal('home')} className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-glow to-amber-warm text-white px-6 py-3 sm:px-8 sm:py-4 rounded-full text-base sm:text-lg font-extrabold hover:shadow-2xl hover:shadow-amber-glow/30 transition-all duration-300 hover:-translate-y-1 cursor-pointer">
               <ShoppingBag className="w-5 h-5" />
               Shop Purafy Home — $159.99
             </button>
-            <button onClick={() => openUpsellModal('mini')} className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/15 text-white px-8 py-4 rounded-full text-lg font-extrabold hover:bg-white/15 transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+            <button onClick={() => openUpsellModal('mini')} className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/15 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-full text-base sm:text-lg font-extrabold hover:bg-white/15 transition-all duration-300 hover:-translate-y-1 cursor-pointer">
               <ShoppingBag className="w-5 h-5" />
               Shop Purafy Mini — $59.99
             </button>
@@ -41,7 +41,7 @@ const CTA: React.FC = () => {
 
           <p className="text-white/25 text-sm mt-6">$5.99 flat-rate US shipping. No hidden fees.</p>
 
-          <div className="flex flex-wrap items-center justify-center gap-8 mt-12">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 mt-12">
             {[
               { icon: Shield, label: 'SSL Secure\nCheckout' },
               { icon: RotateCcw, label: '30-Day Money\nBack Guarantee' },

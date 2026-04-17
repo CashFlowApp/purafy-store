@@ -50,7 +50,7 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-5xl md:text-7xl lg:text-8xl text-white leading-[1] mb-6 font-extrabold tracking-tight"
+          className="text-4xl md:text-7xl lg:text-8xl text-white leading-[1] mb-6 font-extrabold tracking-tight"
           style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
         >
           Better Air.

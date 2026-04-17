@@ -29,7 +29,7 @@ const ProductShowcase: React.FC = () => {
         <div className="grid lg:grid-cols-3 gap-8 items-center">
           <div className="space-y-8">
             {leftFeatures.map((feature, i) => (
-              <motion.div key={feature.label} initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.15 }} className="flex items-start gap-4 text-right lg:justify-end">
+              <motion.div key={feature.label} initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.15 }} className="flex items-start gap-4 text-left lg:text-right lg:justify-end">
                 <div className="lg:order-2">
                   <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
                     <feature.icon className="w-5 h-5 text-purafy-400" />
@@ -83,9 +83,12 @@ const ProductShowcase: React.FC = () => {
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }} className="text-center mt-12">
-          <button onClick={() => openUpsellModal('home')} className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-glow to-amber-warm text-white px-8 py-4 rounded-full text-lg font-bold hover:shadow-2xl hover:shadow-amber-glow/30 transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }} className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
+          <button onClick={() => openUpsellModal('home')} className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-glow to-amber-warm text-white px-6 py-4 rounded-full text-base sm:text-lg font-bold hover:shadow-2xl hover:shadow-amber-glow/30 transition-all duration-300 hover:-translate-y-1 cursor-pointer">
             <ShoppingBag className="w-5 h-5" />Shop Purafy Home — $159.99
+          </button>
+          <button onClick={() => openUpsellModal('mini')} className="inline-flex items-center gap-3 bg-gradient-to-r from-purafy-500 to-purafy-600 text-white px-6 py-4 rounded-full text-base sm:text-lg font-bold hover:shadow-2xl hover:shadow-purafy-500/30 transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+            <ShoppingBag className="w-5 h-5" />Shop Purafy Mini — $59.99
           </button>
         </motion.div>
       </div>

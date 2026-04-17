@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-purafy-950 border-t border-white/5 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-4 gap-12 mb-16">
+        <div className="grid md:grid-cols-4 gap-8 md:gap-12 mb-16">
           <div className="md:col-span-1">
             <Logo className="h-8 w-auto mb-4" />
             <p className="text-white/25 text-sm leading-relaxed">Better air. Better sleep. Better life.</p>

@@ -30,30 +30,30 @@ const ComparisonTable: React.FC = () => {
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <div className="grid grid-cols-3 bg-purafy-900 text-white">
-            <div className="p-4 text-sm font-bold"></div>
-            <div className="p-4 text-center">
-              <div className="text-sm font-extrabold">Purafy Home</div>
-              <div className="text-xs text-purafy-300">Best Seller</div>
+            <div className="p-2 sm:p-4 text-xs sm:text-sm font-bold"></div>
+            <div className="p-2 sm:p-4 text-center">
+              <div className="text-xs sm:text-sm font-extrabold">Purafy Home</div>
+              <div className="text-[10px] sm:text-xs text-purafy-300">Best Seller</div>
             </div>
-            <div className="p-4 text-center">
-              <div className="text-sm font-extrabold">Purafy Mini</div>
-              <div className="text-xs text-purafy-300">Most Portable</div>
+            <div className="p-2 sm:p-4 text-center">
+              <div className="text-xs sm:text-sm font-extrabold">Purafy Mini</div>
+              <div className="text-[10px] sm:text-xs text-purafy-300">Most Portable</div>
             </div>
           </div>
 
           {rows.map((row, index) => (
             <div key={row.label} className={`grid grid-cols-3 ${index % 2 === 0 ? 'bg-white' : 'bg-surface-light/50'} border-t border-gray-50`}>
-              <div className="p-4 text-sm font-semibold text-purafy-800">{row.label}</div>
-              <div className="p-4 text-center text-sm text-gray-600">
+              <div className="p-2 sm:p-4 text-xs sm:text-sm font-semibold text-purafy-800">{row.label}</div>
+              <div className="p-2 sm:p-4 text-center text-xs sm:text-sm text-gray-600">
                 {typeof row.home === 'boolean' ? (
-                  row.home ? <Check className="w-5 h-5 text-green-500 mx-auto" /> : <span className="text-gray-300">—</span>
+                  row.home ? <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mx-auto" /> : <span className="text-gray-300">--</span>
                 ) : (
                   <span className={row.label === 'Price' ? 'font-extrabold text-purafy-900' : ''}>{row.home}</span>
                 )}
               </div>
-              <div className="p-4 text-center text-sm text-gray-600">
+              <div className="p-2 sm:p-4 text-center text-xs sm:text-sm text-gray-600">
                 {typeof row.mini === 'boolean' ? (
-                  row.mini ? <Check className="w-5 h-5 text-green-500 mx-auto" /> : <span className="text-gray-300">—</span>
+                  row.mini ? <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mx-auto" /> : <span className="text-gray-300">--</span>
                 ) : (
                   <span className={row.label === 'Price' ? 'font-extrabold text-purafy-900' : ''}>{row.mini}</span>
                 )}
